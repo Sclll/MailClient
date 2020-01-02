@@ -45,8 +45,8 @@ public class Authority {
 		return myEmailAccount;
 	}
 	
-	public static String getHost() {
-		return "smtp.163.com";
+	public static String getPop3Host() {
+		return "pop.163.com";
 	}
 	
 	public static String getPassword() {

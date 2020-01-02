@@ -19,7 +19,7 @@ public class QueryMail {
 		try {
 			//创建pop3存储对象
 			Store store = Authority.getPop3Session().getStore("pop3s");
-			store.connect(Authority.getHost(), Authority.getAddress(), Authority.getPassword());
+			store.connect(Authority.getPop3Host(), Authority.getAddress(), Authority.getPassword());
 			//创建folder对象
 			Folder emailFolder = store.getFolder("");
 			emailFolder.open(Folder.READ_ONLY);
