@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,12 +25,12 @@ public class MakeMail {
     	recipients = new ArrayList<String>();
     	subject = "";
     	content = "";
-    	message = new MimeMessage(Model.Authority.getSmtpSession());
+    	message = new MimeMessage(model.Authority.getSmtpSession());
     }
 	
     public String sendMessage() throws Exception {
     	// 1. From： 发信人
-        message.setFrom(new InternetAddress(Model.Authority.getAddress(), myNickname, "UTF-8"));
+        message.setFrom(new InternetAddress(model.Authority.getAddress(), myNickname, "UTF-8"));
  
         // 2. To: 收件人（可以增加多个收件人、抄送、密送）
         message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiverAddress, receiverNickname, "UTF-8"));
@@ -47,7 +47,7 @@ public class MakeMail {
         // 6. 保存设置
         message.saveChanges();
  
-        return Model.Authority.sendMail(message);
+        return model.Authority.sendMail(message);
     }
     
     public void setReceiverAddress(String address) {

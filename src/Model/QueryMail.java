@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 
@@ -19,9 +19,9 @@ public class QueryMail {
 		try {
 			//创建pop3存储对象
 			Store store = Authority.getPop3Session().getStore("pop3s");
-			store.connect(Authority.getPop3Host(), Authority.getAddress(), Authority.getPassword());
+			store.connect();
 			//创建folder对象
-			Folder emailFolder = store.getFolder("");
+			Folder emailFolder = store.getFolder("INBOX");
 			emailFolder.open(Folder.READ_ONLY);
 			
 			Message[] messages = emailFolder.getMessages();
