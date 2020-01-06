@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="center" hgap="10" prefHeight="300.0" prefWidth="400.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<padding><Insets bottom="10" left="25" right="25" top="25" /></padding>
+   <children>
+   
+      <Text text="Niubility Mail" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </GridPane.margin>
+      </Text>
+      <Label text="MailAddress:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      <TextField fx:id="address" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    
+   <Text fx:id="hint" fill="RED" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+   <Button fx:id="login" onAction="#clickButton" text="Sign In" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+    
+</GridPane>
