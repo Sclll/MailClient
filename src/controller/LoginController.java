@@ -23,19 +23,16 @@ public class LoginController {
 	@FXML private Button login;
 	
 	@FXML protected void clickButton(ActionEvent event) {
-		String result = Authority.mailLogin(address.getText(), password.getText());
+	//	String result = Authority.mailLogin(address.getText(), password.getText());
+		String result = Authority.mailLogin("rogerscl@163.com", "scl1123");
 		if (result == "success") {
-			ObservableList<Stage> stage = FXRobotHelper.getStages();
-			Scene scene = null;
-			try {
-				scene = new Scene(FXMLLoader.load(getClass().getResource("../view/MainView.fxml")));
-			} catch (IOException e) {
-				// TODO 自动生成的 catch 块
-				e.printStackTrace();
-			}
-			stage.get(0).setScene(scene);
-		}else {
-			hint.setText("Login Wrong!");
+			new MailViewController();
+		}else if (result == "error1") {
+			hint.setText("error1");
+		}else if (result == "error2") {
+			hint.setText("用户名或密码错误！");
+		}else if (result == "error3") {
+			hint.setText("error3");
 		}
 	}
 	

@@ -20,7 +20,6 @@ public class Authority {
     private static Session _smtpsession;
     private static Session _pop3session;
     private static Authenticator auth;
-    private static ArrayList<Message> list;
 	
 	public static String mailLogin(String mailaddress,String password){
 		try {
@@ -46,32 +45,21 @@ public class Authority {
 			Folder emailFolder = store.getFolder("INBOX");
 			emailFolder.open(Folder.READ_ONLY);
 			
-			Message[] messages = emailFolder.getMessages();
-			
-			list = new ArrayList<Message>();
-			for (int i = 0, n = messages.length; i < n; i++) {
-			   list.add(messages[i]);
-		         System.out.println("Email Number " + (i + 1));
-			}
 		    emailFolder.close(false);
 		    store.close();
 	    } catch (NoSuchProviderException e) {
 	       e.printStackTrace();
-	       return "error!";
+	       return "error1";
 	    } catch (MessagingException e) {
 	       e.printStackTrace();
-	       return "error!";
+	       return "error2";
 	    } catch (Exception e) {
 	       e.printStackTrace();
-	       return "error!";
+	       return "error3";
 	    }
 		myEmailAccount = mailaddress;
 		myEmailPassword = password;
 		return "success";
-	}
-	
-	public static ArrayList<Message> getMessage() {
-		return list;
 	}
 	
 	public static Authenticator getAuthor() {
