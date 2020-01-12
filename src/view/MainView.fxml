@@ -84,6 +84,6 @@
             </Label>
          </children></HBox>
       <ListView fx:id="maillist" layoutY="52.0" prefHeight="668.0" prefWidth="359.0" />
-      <WebView layoutX="355.0" layoutY="52.0" prefHeight="668.0" prefWidth="925.0" />
+      <WebView fx:id="webview" layoutX="355.0" layoutY="52.0" prefHeight="668.0" prefWidth="925.0" />
    </children>
 </AnchorPane>

@@ -39,6 +39,13 @@ public class ParseMail {
         return from;
 	}
 	
+	public static String getFromAddress(MimeMessage message) throws MessagingException, UnsupportedEncodingException {
+		Address[] froms = message.getFrom();
+		if (froms.length < 1) return "null";
+		InternetAddress address = (InternetAddress) froms[0]; 
+        return address.toString();
+	}
+	
 	public static String getDate(MimeMessage msg) throws MessagingException {
 		Date receivedDate = msg.getSentDate();  
         if (receivedDate == null)  return "";  
@@ -65,7 +72,7 @@ public class ParseMail {
 	 public static String getReceiveAddress(MimeMessage msg, Message.RecipientType type) throws MessagingException {  
 	        StringBuffer receiveAddress = new StringBuffer();  
 	        Address[] addresss = null;  
-	        if (type == null) {  
+	        if (type == null) {   
 	            addresss = msg.getAllRecipients();  
 	        } else {  
 	            addresss = msg.getRecipients(type);  

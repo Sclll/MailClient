@@ -40,7 +40,7 @@ public class QueryMail {
 			emailFolder.open(Folder.READ_ONLY);
 			
 			Message[] messages = emailFolder.getMessages();
-			for (int i = 0; i < messages.length; i++) {
+			for (int i = messages.length-1; i >= 0; i++) {
 	            list.add((MimeMessage)messages[i]);
 	         }
 			

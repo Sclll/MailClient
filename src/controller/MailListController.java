@@ -22,7 +22,7 @@ public class MailListController {
 		
 		try {
 			root = loader.load();
-		} catch (IOException e) {
+		} catch (IOException e) { 
 			e.printStackTrace();
 		}
 		Scene scene = new Scene(root,400,100);

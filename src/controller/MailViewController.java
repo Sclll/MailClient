@@ -1,8 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import com.sun.javafx.robot.impl.FXRobotHelper;
@@ -19,10 +21,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Authority;
 import model.MailListCell;
+import model.ParseMail;
 import model.QueryMail;
 
 public class MailViewController {
@@ -32,6 +37,8 @@ public class MailViewController {
 	@FXML private Button forwardmail;
 	@FXML private Button deletemail;
 	@FXML private Label address;
+	@FXML private WebView webview;
+	private Message tmpmessage;
 	private ObservableList list = FXCollections.observableArrayList();
 	
 	public MailViewController() {
@@ -46,6 +53,7 @@ public class MailViewController {
 			e.printStackTrace();
 		}
 		
+		address.setText(Authority.getAddress());
 		initListView();
 	}
 	
@@ -59,6 +67,22 @@ public class MailViewController {
 			}
 			
 		});
+		
+		maillist.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue) -> {
+			setContent((Message)newValue);
+		});
+	}
+
+	public void setContent(Message msg) {
+		
+		WebEngine engine = webview.getEngine();
+		StringBuffer contents = new StringBuffer(30);
+        try {
+			ParseMail.getContent(msg, contents);
+		} catch (MessagingException | IOException e) {
+			e.printStackTrace();
+		}
+		engine.loadContent(contents.toString());
 	}
 	
 	@FXML 
@@ -72,16 +96,34 @@ public class MailViewController {
 	
 	@FXML 
 	public void replyEvent(ActionEvent event) {
-		
+		MailSenderController controller = new MailSenderController();
+		try {
+			controller.setTo(ParseMail.getFromAddress((MimeMessage)tmpmessage));
+			controller.setSubject("回复："+ParseMail.getSubject((MimeMessage)tmpmessage));
+		} catch (UnsupportedEncodingException | MessagingException e) {
+			e.printStackTrace();
+		}
+		Stage stage = new Stage();
+		stage.setTitle("发送邮件");
+		stage.setScene(controller.getScene());
+		stage.show();
 	}
 	
 	@FXML 
 	public void forwardEvent(ActionEvent event) {
-		
+		MailSenderController controller = new MailSenderController();
+		Stage stage = new Stage();
+		stage.setTitle("发送邮件");
+		stage.setScene(controller.getScene());
+		stage.show();
 	}
 	
 	@FXML 
 	public void deleteEvent(ActionEvent event) {
-		
+		try {
+			ParseMail.deleteMessage(tmpmessage);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 	}
 }

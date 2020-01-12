@@ -17,7 +17,6 @@ public class Authority {
 	private static String myEmailAccount = "";
     private static String myEmailPassword = "";	
     private static Session _session;
-    private static Session _smtpsession;
     private static Session _pop3session;
     private static Authenticator auth;
 	
@@ -74,19 +73,6 @@ public class Authority {
 		return auth;
 	}
 	
-	public static String sendMail(Message message) {
-		Transport transport;
-		try {
-			transport = getSmtpSession().getTransport();
-			transport.connect();
-			transport.sendMessage(message, message.getAllRecipients());
-			transport.close();
-		} catch (MessagingException e) {
-			return "error!";
-		}
-		return "success";
-	}
-	
 	public static String getAddress() {
 		return myEmailAccount;
 	}
@@ -106,24 +92,12 @@ public class Authority {
 		    props.put("mail.pop3s.host", "pop.163.com");
 		    props.put("mail.pop3s.port", "995");
 		    props.put("mail.pop3.starttls.enable", "true");
-	        _smtpsession = Session.getDefaultInstance(props,getAuthor());
-	        _smtpsession.setDebug(true);
+	        _session = Session.getDefaultInstance(props,getAuthor());
+	        _session.setDebug(true);
 		}
 		return _session;
 	}
 	
-	public static Session getSmtpSession() {
-		if (_smtpsession == null) {
-			Properties props = new Properties(); 
-	        props.put("mail.transport.protocol", "smtp");
-	        props.put("mail.smtp.host", "smtp.163.com");   
-	        props.put("mail.smtp.auth", "true");
-	        props.put("mail.smtp.starttls.enable", "true");
-	        _smtpsession = Session.getDefaultInstance(props,getAuthor());
-	        _smtpsession.setDebug(true);
-		}
-        return _smtpsession;
-	}
 	
 	public static Session getPop3Session() {
 		Properties properties = new Properties();

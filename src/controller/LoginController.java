@@ -28,7 +28,7 @@ public class LoginController {
 		if (result == "success") {
 			new MailViewController();
 		}else if (result == "error1") {
-			hint.setText("error1");
+			hint.setText("error1"); 
 		}else if (result == "error2") {
 			hint.setText("用户名或密码错误！");
 		}else if (result == "error3") {
