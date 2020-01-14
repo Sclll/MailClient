@@ -24,6 +24,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -42,7 +44,12 @@ public class MailViewController {
 	@FXML private Label address;
 	@FXML private WebView webview;
 	@FXML private Button download;
+	@FXML private ImageView imagesend;
+	@FXML private ImageView imagereply;
+	@FXML private ImageView imageforward;
+	@FXML private ImageView imagedelete;
 	private int index;
+	private String filePath;
 	private ObservableList list = FXCollections.observableArrayList();
 	
 	public MailViewController() {
@@ -58,15 +65,23 @@ public class MailViewController {
 		}
 		download.setVisible(false);
 		
+		initImage();
+		
 		address.setText(Authority.getAddress());
 		
 		new Thread(new Runnable() {
-
 			@Override
 			public void run() {
 				initListView(QueryMail.getAllMail());
 			}	
 		}).start();
+	}
+	
+	private void initImage() {
+		imagesend.setImage(new Image("images/new.png"));
+		imagereply.setImage(new Image("images/reply.png"));
+		imageforward.setImage(new Image("images/forward.png"));
+		imagedelete.setImage(new Image("images/delete.png"));
 	}
 	
 	public void initListView(ArrayList<MimeMessage> lists) {
@@ -97,11 +112,10 @@ public class MailViewController {
 		});
 	}
 
-	public void setContent(Message msg) {
-		
+	public void setContent(Message msg) {	
 		WebEngine engine = webview.getEngine();
 		StringBuffer contents = new StringBuffer(30);
-        try {
+		try {
 			ParseMail.getContent(msg, contents);
 		} catch (MessagingException | IOException e) {
 			e.printStackTrace();
@@ -115,6 +129,7 @@ public class MailViewController {
 		Stage stage = new Stage();
 		stage.setTitle("发送邮件");
 		stage.setScene(controller.getScene());
+		stage.getIcons().add(new Image("file:resources/images/cow.png"));
 		stage.show();
 	}
 	
@@ -124,10 +139,14 @@ public class MailViewController {
 		Stage stage = new Stage();
 		stage.setTitle("回复邮件");
 		stage.setScene(controller.getScene());
+		stage.getIcons().add(new Image("file:resources/images/cow.png"));
 		try {
 			controller.setTo(ParseMail.getFromAddress((MimeMessage)maillist.getItems().get(index)));
 			controller.setSubject("回复："+ParseMail.getSubject((MimeMessage)maillist.getItems().get(index)));
-		} catch (UnsupportedEncodingException | MessagingException e) {
+			StringBuffer content = new StringBuffer(30);
+			ParseMail.getContent((Part)maillist.getItems().get(index), content);
+			controller.setContent(content.toString());
+		} catch (MessagingException | IOException e) {
 			e.printStackTrace();
 		}
 		stage.show();
@@ -139,6 +158,7 @@ public class MailViewController {
 				Stage stage = new Stage();
 		stage.setTitle("转发邮件");
 		stage.setScene(controller.getScene());
+		stage.getIcons().add(new Image("file:resources/images/cow.png"));
 		try {
 			controller.setSubject("转发："+ParseMail.getSubject((MimeMessage)maillist.getItems().get(index)));
 			StringBuffer content = new StringBuffer(30);
@@ -163,18 +183,23 @@ public class MailViewController {
 		}
 	}
 	
-	@FXML void downloadEvent(ActionEvent event) {
+	@FXML 
+	public void downloadEvent(ActionEvent event) {
 		JFileChooser fileChooser = new JFileChooser("D:\\");
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnVal = fileChooser.showOpenDialog(fileChooser);
-		String filePath = "";
 		if(returnVal == JFileChooser.APPROVE_OPTION){
 			filePath= fileChooser.getSelectedFile().getAbsolutePath();
 		}
-		try {
-			ParseMail.saveAttachment((Message)maillist.getItems().get(index), filePath);
-		} catch (MessagingException | IOException e) {
-			e.printStackTrace();
-		}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					ParseMail.saveAttachment((Message)maillist.getItems().get(index), filePath);
+				} catch (MessagingException | IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
 }

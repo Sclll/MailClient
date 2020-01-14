@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="MailClient.jar" size="21470" download="eager" />
+    <jar href="MailClient.jar" size="49501" download="eager" />
     <jar href="libs\javax.mail-1.6.2.jar" size="659031" download="eager" />
   </resources>
   <jfx:javafx-desc  width="0" height="0" main-class="application.Main"  name="NiubilityMail" />

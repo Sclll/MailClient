@@ -30,10 +30,10 @@ public class QueryMail {
 			emailFolder.open(Folder.READ_ONLY);
 			
 			Message[] messages = emailFolder.getMessages();
-			for (int i = messages.length-1; i >= 0; i++) {
+			for (int i = messages.length-1; i >= 0; i--) {
 	            list.add((MimeMessage)messages[i]);
 	         }
-			
+			 
 	    } catch (NoSuchProviderException e) {
 	       e.printStackTrace();
 	    } catch (MessagingException e) {

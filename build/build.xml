@@ -91,7 +91,7 @@
 		<fx:resources id="appRes">
 			<fx:fileset dir="dist" includes="MailClient.jar"/>
 			<fx:fileset dir="dist" includes="libs/*"/>
-			<fx:fileset dir="dist" includes="resources/**"/>
+			<fx:fileset dir="dist" includes="resources/*"/>
 		</fx:resources>
 	
 		<fx:application id="fxApplication"

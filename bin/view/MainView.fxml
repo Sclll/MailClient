@@ -19,9 +19,9 @@
          <children>
             <Button fx:id="sendmail" mnemonicParsing="false" onAction="#sendEvent" text="写信">
                <graphic>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imagesend" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/new.png" />
+                        <Image url="@../images/new.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -34,9 +34,9 @@
             </Button>
             <Button fx:id="replymail" mnemonicParsing="false" onAction="#replyEvent" text="回复">
                <graphic>
-                  <ImageView fitHeight="27.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imagereply" fitHeight="27.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/reply.png" />
+                        <Image url="@../images/reply.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -49,9 +49,9 @@
             </Button>
             <Button fx:id="forwardmail" mnemonicParsing="false" onAction="#forwardEvent" text="转发">
                <graphic>
-                  <ImageView fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageforward" fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/forward.png" />
+                        <Image url="@../images/forward.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -64,9 +64,9 @@
             </Button>
             <Button fx:id="deletemail" mnemonicParsing="false" onAction="#deleteEvent" text="删除">
                <graphic>
-                  <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imagedelete" fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/delete.png" />
+                        <Image url="@../images/delete.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -94,7 +94,7 @@
                </padding>
             </Label>
          </children></HBox>
-      <ListView fx:id="maillist" layoutY="52.0" prefHeight="668.0" prefWidth="359.0" />
+      <ListView fx:id="maillist" layoutY="52.0" maxWidth="359.0" prefHeight="668.0" prefWidth="359.0" />
       <WebView fx:id="webview" layoutX="355.0" layoutY="52.0" prefHeight="668.0" prefWidth="925.0" />
    </children>
 </AnchorPane>

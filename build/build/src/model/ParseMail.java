@@ -43,14 +43,14 @@ public class ParseMail {
 		Address[] froms = message.getFrom();
 		if (froms.length < 1) return "null";
 		InternetAddress address = (InternetAddress) froms[0]; 
-        return address.getAddress();
+        return address.getAddress(); 
 	}
 	
 	public static String getDate(MimeMessage msg) throws MessagingException {
 		Date receivedDate = msg.getSentDate();  
         if (receivedDate == null)  return "";  
         
-        String pattern = "yyyy年MM月dd日 E HH:mm ";  
+        String pattern = "yy年MM月dd日  HH:mm ";  
           
         return new SimpleDateFormat(pattern).format(receivedDate);  
 	}
@@ -146,7 +146,7 @@ public class ParseMail {
 	 private static void saveFile(InputStream is, String destDir, String fileName) throws FileNotFoundException, IOException {  
         BufferedInputStream bis = new BufferedInputStream(is);  
         BufferedOutputStream bos = new BufferedOutputStream(  
-                new FileOutputStream(new File(destDir + fileName)));  
+        new FileOutputStream(new File(destDir +"\\" + fileName)));  
         int len = -1;  
         while ((len = bis.read()) != -1) {  
             bos.write(len);  

@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import controller.LoginController;
@@ -28,7 +29,8 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
        Scene scene = new Scene(root, 400, 300);
- 
+       
+       primaryStage.getIcons().add(new Image("images/cow.png"));
        primaryStage.setTitle("Niubility Mail");
        primaryStage.setScene(scene);
        primaryStage.show();

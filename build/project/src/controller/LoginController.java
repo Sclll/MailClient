@@ -24,7 +24,6 @@ public class LoginController {
 	
 	@FXML protected void clickButton(ActionEvent event) {
 		String result = Authority.mailLogin(address.getText(), password.getText());
-//		String result = Authority.mailLogin("rogerscl@163.com", "scl1123");
 		if (result == "success") {
 			new MailViewController();
 		}else if (result == "error1") {

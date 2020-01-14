@@ -7,7 +7,6 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import controller.MailListController;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
@@ -21,7 +20,6 @@ public class MailListCell extends ListCell<MimeMessage>{
 		super.updateItem(message,empty);
 		if (message != null) {
 			BorderPane cell = new BorderPane();
-			cell.setMaxSize(250, 100);
 			 
 			String mailfrom = "";
 			String maildate = "";
@@ -30,30 +28,27 @@ public class MailListCell extends ListCell<MimeMessage>{
 				mailfrom = ParseMail.getFrom(message);
 				maildate = ParseMail.getDate(message);
 				mailcontent = ParseMail.getSubject(message);
-//				StringBuffer contents = new StringBuffer(30);
-//	            ParseMail.getContent(message, contents);
-//	            mailcontent = contents.length()>100?contents.substring(0,100) + "..." : contents.toString();
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			} catch (MessagingException e) {
 				e.printStackTrace(); 
-			} /*catch (IOException e) {
-				e.printStackTrace();
-			}*/
+			}
 			 
              Text from = new Text(mailfrom);
-             from.setFont(Font.font(14));
+             from.setFont(Font.font(18));
              from.setFill(Color.BLACK);
              cell.setLeft(from);
              
              Text date = new Text(maildate);
-             date.setFont(Font.font(12));
+             date.setFont(Font.font(16));
              date.setFill(Color.BLACK);
              cell.setRight(date);
               
+             if (mailcontent.length()>24) mailcontent = mailcontent.substring(0, 23) +"...";
              Text content = new Text(mailcontent);
-             content.setFont(Font.font(10));
+             content.setFont(Font.font(14));
              content.setFill(Color.BLACK);
+             content.resize(100, 20);
              cell.setBottom(content);
              
              setGraphic(cell);
