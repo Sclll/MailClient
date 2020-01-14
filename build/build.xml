@@ -5,6 +5,7 @@
 			<filelist>
 				<file name="${java.home}\..\lib\ant-javafx.jar"/>
 				<file name="${java.home}\lib\jfxrt.jar"/>
+				<file name="${basedir}"/>
 			</filelist>
 		</path>
 	
@@ -90,6 +91,7 @@
 		<fx:resources id="appRes">
 			<fx:fileset dir="dist" includes="MailClient.jar"/>
 			<fx:fileset dir="dist" includes="libs/*"/>
+			<fx:fileset dir="dist" includes="resources/**"/>
 		</fx:resources>
 	
 		<fx:application id="fxApplication"
@@ -108,7 +110,7 @@
 			<fx:resources refid="appRes"/>
 	
 			<manifest>
-				<attribute name="Implementation-Vendor" value="/"/>
+				<attribute name="Implementation-Vendor" value="Group21"/>
 				<attribute name="Implementation-Title" value="NiubilityMail"/>
 				<attribute name="Implementation-Version" value="1.0"/>
 				<attribute name="JavaFX-Feature-Proxy" value="None"/>
@@ -128,7 +130,7 @@
 			updatemode="background" >
 	
 			<fx:platform basedir="${java.home}"/>
-			<fx:info title="MailClient" vendor="/"/>
+			<fx:info title="MailClient" vendor="Group21"/>
 	
 			<fx:application refId="fxApplication"/>
 			<fx:resources refid="appRes"/>

@@ -146,7 +146,7 @@ public class ParseMail {
 	 private static void saveFile(InputStream is, String destDir, String fileName) throws FileNotFoundException, IOException {  
         BufferedInputStream bis = new BufferedInputStream(is);  
         BufferedOutputStream bos = new BufferedOutputStream(  
-                new FileOutputStream(new File(destDir + fileName)));  
+        new FileOutputStream(new File(destDir + fileName)));  
         int len = -1;  
         while ((len = bis.read()) != -1) {  
             bos.write(len);  

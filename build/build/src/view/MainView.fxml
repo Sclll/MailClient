@@ -17,11 +17,11 @@
    <children>
       <HBox prefHeight="54.0" prefWidth="1280.0">
          <children>
-            <Button fx:id="sendmail" onAction="#sendEvent" mnemonicParsing="false" text="写信">
+            <Button fx:id="sendmail" mnemonicParsing="false" onAction="#sendEvent" text="写信">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resource/new.png" />
+                        <Image url="@../../resources/new.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -32,11 +32,11 @@
                   <Insets bottom="5.0" left="10.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="replymail" onAction="#replyEvent" mnemonicParsing="false" text="回复">
+            <Button fx:id="replymail" mnemonicParsing="false" onAction="#replyEvent" text="回复">
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resource/reply.png" />
+                        <Image url="@../../resources/reply.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -47,11 +47,11 @@
                   <Insets bottom="5.0" left="10.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="forwardmail" onAction="#forwardEvent" mnemonicParsing="false" text="转发">
+            <Button fx:id="forwardmail" mnemonicParsing="false" onAction="#forwardEvent" text="转发">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resource/forward.png" />
+                        <Image url="@../../resources/forward.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -62,14 +62,22 @@
                   <Insets bottom="5.0" left="10.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="deletemail" onAction="#deleteEvent" mnemonicParsing="false" text="删除">
+            <Button fx:id="deletemail" mnemonicParsing="false" onAction="#deleteEvent" text="删除">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resource/delete.png" />
+                        <Image url="@../../resources/delete.png" />
                      </image>
                   </ImageView>
                </graphic>
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="download" mnemonicParsing="false" onAction="#downloadEvent" text="下载附件">
                <font>
                   <Font size="20.0" />
                </font>
@@ -77,10 +85,13 @@
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <Label fx:id="address" alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="812.0" text="rogerscl@163.com" textAlignment="CENTER">
+            <Label fx:id="address" alignment="CENTER" prefHeight="54.0" prefWidth="249.0" text="rogerscl@163.com" textAlignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
             </Label>
          </children></HBox>
       <ListView fx:id="maillist" layoutY="52.0" prefHeight="668.0" prefWidth="359.0" />

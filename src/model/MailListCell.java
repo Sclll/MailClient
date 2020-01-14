@@ -36,7 +36,7 @@ public class MailListCell extends ListCell<MimeMessage>{
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			} catch (MessagingException e) {
-				e.printStackTrace();
+				e.printStackTrace(); 
 			} /*catch (IOException e) {
 				e.printStackTrace();
 			}*/

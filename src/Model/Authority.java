@@ -22,15 +22,8 @@ public class Authority {
 	
 	public static String mailLogin(String mailaddress,String password){
 		try {
-			Properties properties = new Properties();
-			properties.put("mail.store.protocol", "pop3s");
-		    properties.put("mail.pop3s.host", "pop.163.com");
-		    properties.put("mail.pop3s.port", "995");
-		    properties.put("mail.pop3s.starttls.enable", "true");
-		    properties.put("mail.pop3s.socketFactory.class",
-		            "javax.net.ssl.SSLSocketFactory" ); 
-		    properties.put("mail.pop3s.auth", "true");
-		    Session tmpsession = Session.getDefaultInstance(properties,new Authenticator() {
+			Pop3Session session = Pop3Session.getFactorySession();
+		    Session tmpsession = Session.getDefaultInstance(session.getProperties(),new Authenticator() {
 		    	@Override
 				protected PasswordAuthentication getPasswordAuthentication() {
 					return new PasswordAuthentication(mailaddress,password);

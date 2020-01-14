@@ -29,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 import model.Authority;
+import model.SmtpSession;
 
 public class MailSenderController {
 	@FXML private TextField receiver;
@@ -56,16 +57,8 @@ public class MailSenderController {
 	
 	@FXML
 	public void sendEvent(ActionEvent event) throws MessagingException {
-		Properties props = new Properties(); 
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.host", "smtp.163.com");   
-        props.put("mail.smtp.port","25");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        Session smtpsession = Session.getInstance(props,Authority.getAuthor());
-        smtpsession.setDebug(true);
-		
-		MimeMessage message = new MimeMessage(smtpsession);
+		SmtpSession session = SmtpSession.getFactorySession();
+		MimeMessage message = new MimeMessage(session.getSession());
 		message.setFrom(Authority.getAddress());
 		message.setRecipient(Message.RecipientType.TO, new InternetAddress(receiver.getText()));
 		message.setRecipients(Message.RecipientType.CC, copy.getText());
@@ -78,7 +71,7 @@ public class MailSenderController {
 		message.saveChanges();
 		
 		try {
-			Transport transport = smtpsession.getTransport();
+			Transport transport = session.getSession().getTransport();
 			transport.connect();
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
